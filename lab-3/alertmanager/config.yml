@@ -1,0 +1,9 @@
+route:
+    receiver: 'slack'
+
+receivers:
+    - name: 'slack'
+      slack_configs:
+          - send_resolved: true
+            channel: '#btm-lab-alerts'
+            api_url: 'https://hooks.slack.com/services/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'

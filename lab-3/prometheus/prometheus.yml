@@ -1,0 +1,34 @@
+global:
+  scrape_interval:     20s
+  evaluation_interval: 20s
+  external_labels:
+      monitor: 'my-project'
+
+rule_files:
+  - 'alert-rules.yml'
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
+
+scrape_configs:
+- job_name: 'prometheus'
+  scrape_interval: 20s
+  static_configs:
+  - targets: ['localhost:9090']
+
+- job_name: 'cadvisor'
+  scrape_interval: 20s
+  static_configs:
+  - targets: ['cadvisor:8080']
+
+- job_name: 'b2m-nodejs'
+  scrape_interval: 20s
+  static_configs:
+  - targets: ['b2m-nodejs:3003']
+    labels:
+      service: 'b2m-nodejs'
+
